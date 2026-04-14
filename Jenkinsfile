@@ -53,6 +53,20 @@ pipeline {
                 '''
             }
         }
+        stage('Build Docker Image') {
+    steps {
+        sh 'docker build -t your-dockerhub-username/app:latest .'
+    }
+}
+
+stage('Push Image') {
+    steps {
+        sh '''
+        docker login -u USERNAME -p PASSWORD
+        docker push your-dockerhub-username/app:latest
+        '''
+    }
+}
     }
 
     post {
