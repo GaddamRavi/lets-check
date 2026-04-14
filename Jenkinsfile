@@ -6,7 +6,7 @@ pipeline {
 
         stage('Clone Code') {
             steps {
-                git 'https://github.com/your-username/your-repo.git'
+                git 'https://github.com/GaddamRavi/lets-check.git'
             }
         }
 
