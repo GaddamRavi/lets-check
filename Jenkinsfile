@@ -5,10 +5,12 @@ pipeline {
     stages {
 
         stage('Clone Code') {
-            steps {
-                git 'https://github.com/GaddamRavi/lets-check.git'
-            }
+    steps {
+        git branch: 'main',
+            url: 'https://github.com/GaddamRavi/lets-check.git'
         }
+        }
+
 
         stage('Install Dependencies') {
             steps {
