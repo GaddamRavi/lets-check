@@ -1,38 +1,38 @@
-// Jenkinsfile
 pipeline {
     agent any
 
     stages {
 
         stage('Clone Code') {
-    steps {
-        git branch: 'main',
-            url: 'https://github.com/GaddamRavi/lets-check.git'
-        }
+            steps {
+                git branch: 'main',
+                    url: 'https://github.com/GaddamRavi/lets-check.git'
+            }
         }
 
-
-        stage('Install Dependencies') {
-    steps {
-        sh 'pip3 install -r requirements.txt'
-    }
-}
+        stage('Setup Python Environment') {
+            steps {
+                sh '''
+                python3 -m venv venv
+                . venv/bin/activate
+                pip install --upgrade pip
+                pip install -r requirements.txt
+                '''
+            }
+        }
 
         stage('Run Tests') {
             steps {
-                sh 'pytest'
+                sh '''
+                . venv/bin/activate
+                pytest
+                '''
             }
         }
 
         stage('Build') {
             steps {
-                echo 'Building project...'
-            }
-        }
-
-        stage('Deploy') {
-            steps {
-                echo 'Deploying application...'
+                echo 'Build successful'
             }
         }
     }
